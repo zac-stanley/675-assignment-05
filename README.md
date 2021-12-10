@@ -1,2 +1,3 @@
-# 675-assignment-05
-Repository for MAP675 module 05
+## 675-assignment-05 - Diving deeper into Mapbox Studio and Mapbox GL JS
+1. First Tutorial will be the 2 part make a choropleth map.
+
