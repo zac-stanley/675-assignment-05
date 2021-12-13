@@ -108,11 +108,11 @@ const map = new mapboxgl.Map({
   
     // array of legend labels
     const layers = [
-    '0-448.11',
-    '448.11-1181.79',
-    '1181.79-2006.05',
-    '2006.05-3173.47',
-    '3173.47-6038.77',
+    '0-448',
+    '448-1182',
+    '1181-2006',
+    '2006-3173',
+    '3173-6039',
   ];
 
   // array legend colors
@@ -149,7 +149,7 @@ layers.forEach((layer, i) => {
   });
 
   document.getElementById('cd').innerHTML = covidDeaths.length
-    ? `<h3>${covidDeaths[0].properties.ADMIN}</h3><p><strong><em>${covidDeaths[0].properties.deathRate_perMillion}</strong> deaths per million people</em></p>`
+    ? `<h3>${covidDeaths[0].properties.ADMIN}</h3><p><strong><em>${covidDeaths[0].properties.deathrate_permillion}</strong> deaths per million people</em></p>`
     : `<p>Hover over a country!</p>`;
 });
 
