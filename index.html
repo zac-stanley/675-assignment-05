@@ -54,7 +54,7 @@
       
       #features {
         top: 0;
-        height: 100px;
+        height: 120px;
         margin-top: 20px;
         width: 250px;
       }
@@ -63,9 +63,9 @@
         padding: 10px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         line-height: 18px;
-        height: 150px;
+        height: 90px;
         margin-bottom: 40px;
-        width: 100px;
+        width: 150px;
       }
       
       .legend-key {
@@ -80,7 +80,7 @@
 
 <body>
 <div id='map'></div>
-<div class='map-overlay' id='features'><h2>COVID-19 Death Rates Per-Million</h2><div id='cd'><p>Hover over a country!</p></div></div>
+<div class='map-overlay' id='features'><h2>COVID-19 Death Rate</h2><div id='cd'><p>Hover over a country!</p></div></div>
 <div class='map-overlay' id='legend'></div>
 
 <script>
@@ -144,13 +144,13 @@ layers.forEach((layer, i) => {
 
   // add listener and change info window on hover
   map.on('mousemove', (event) => {
-  const states = map.queryRenderedFeatures(event.point, {
+  const covidDeaths = map.queryRenderedFeatures(event.point, {
     layers: ['COVIDDeathRates']
   });
 
-  document.getElementById('cd').innerHTML = states.length
-    ? `<h3>${states[0].properties.ADMIN}</h3><p><strong><em>${states[0].properties.deathRate_perMillion}</strong> people per square mile</em></p>`
-    : `<p>Hover over a state!</p>`;
+  document.getElementById('cd').innerHTML = covidDeaths.length
+    ? `<h3>${covidDeaths[0].properties.ADMIN}</h3><p><strong><em>${covidDeaths[0].properties.deathRate_perMillion}</strong> deaths per million people</em></p>`
+    : `<p>Hover over a country!</p>`;
 });
 
 });
