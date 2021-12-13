@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Plant Hardiness Zone Map</title>
+    <title>U.S. Population Density</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
@@ -96,6 +96,15 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
+    // make a pointer cursor
+    map.getCanvas().style.cursor = 'default';
+ 
+    // set map bounds to the continental US
+    map.fitBounds([
+    [-133.2421875, 16.972741],
+    [-47.63671875, 52.696361]
+    ]);
+  
   
     // array of legend labels
     const layers = [
@@ -132,12 +141,24 @@ layers.forEach((layer, i) => {
   key.className = 'legend-key';
   key.style.backgroundColor = color;
 
-  // create span element from 
+  // create span element 
   const value = document.createElement('span');
   value.innerHTML = `${layer}`;
   item.appendChild(key);
   item.appendChild(value);
   legend.appendChild(item);
+
+  // add listener and change info window on hover
+  map.on('mousemove', (event) => {
+  const states = map.queryRenderedFeatures(event.point, {
+    layers: ['statedata']
+  });
+
+  document.getElementById('pd').innerHTML = states.length
+    ? `<h3>${states[0].properties.name}</h3><p><strong><em>${states[0].properties.density}</strong> people per square mile</em></p>`
+    : `<p>Hover over a state!</p>`;
+});
+
 });
 
 
