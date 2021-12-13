@@ -10,7 +10,7 @@
 
 1. [COVID-19 Rates](https://covid.ourworldindata.org/data/owid-covid-data.csv) - The complete Our World in Data COVID-19 dataset
 2. [1:110 miillion - Countries](https://www.naturalearthdata.com/downloads/110m-cultural-vectors/) - Natural Earth Data
-3. CSV was cleaned up, joined to countries shapefile andconverted to JSON using mapshaper.
+3. CSV was cleaned up, joined to countries shapefile and converted to JSON using mapshaper.
 
 
 
