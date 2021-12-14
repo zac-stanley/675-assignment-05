@@ -54,9 +54,9 @@
       
       #features {
         top: 0;
-        height: 120px;
+        height: 125px;
         margin-top: 20px;
-        width: 250px;
+        width: 300px;
       }
       
       #legend {
@@ -65,7 +65,7 @@
         line-height: 18px;
         height: 90px;
         margin-bottom: 40px;
-        width: 150px;
+        width: 100px;
       }
       
       .legend-key {
@@ -80,9 +80,12 @@
 
 <body>
 <div id='map'></div>
-<div class='map-overlay' id='features'><h2>COVID-19 Death Rate</h2><div id='cd'><p>Hover over a country!</p></div></div>
+<div class='map-overlay' id='features'><h2>COVID-19 Death Rates Per Million People</h2><div id='cd'><p>Hover over a Country!</p></div></div>
 <div class='map-overlay' id='legend'></div>
 
+<!-- Load the `mapbox-gl-geocoder` plugin. -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 <script>
 // access token
 mapboxgl.accessToken = 'pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA';
@@ -94,6 +97,26 @@ const map = new mapboxgl.Map({
     zoom: 1.5 // starting zoom
     
 });
+
+map.on('click', function (e) {
+  var coords = e.lngLat;
+        map.flyTo({
+        center: [coords.lng ,  coords.lat],
+          speed: 0.1,
+          curve:1});
+    });
+
+
+// Add the control to the map.
+map.addControl(
+  new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+  }),
+  'top-left');
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
  map.on('load', () => {
     // make a pointer cursor
