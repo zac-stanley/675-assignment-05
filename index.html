@@ -1,243 +1,243 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>COVID-19 Death Rates Per Million</title>
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
-      rel="stylesheet"
-    />
 
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>COVID-19 Death Rates Per Million</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
 
-      h2,
-      h3 {
-        margin: 10px;
-        font-size: 18px;
-      }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
-      h3 {
-        font-size: 16px;
-      }
+    h2,
+    h3 {
+      margin: 10px;
+      font-size: 18px;
+    }
 
-      p {
-        margin: 10px;
-        font-size: 16px;
-      }
+    h3 {
+      font-size: 16px;
+    }
 
-      /**
+    p {
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    /**
       * Create a position for the map
       * on the page */
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
 
-      /**
+    /**
       * Set rules for how the map overlays
       * (information box and legend) will be displayed
       * on the page. */
-      .map-overlay {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: #fff;
-        margin-right: 20px;
-        font-family: Arial, sans-serif;
-        overflow: auto;
-        border-radius: 3px;
-      }
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #fff;
+      margin-right: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
 
-      #features {
-        top: 0;
-        height: 125px;
-        margin-top: 20px;
-        width: 400px;
-      }
+    #features {
+      top: 0;
+      height: 125px;
+      margin-top: 20px;
+      width: 400px;
+    }
 
-      #legend {
-        padding: 10px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        line-height: 18px;
-        height: 110px;
-        margin-bottom: 40px;
-        width: 110px;
-      }
+    #legend {
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 18px;
+      height: 110px;
+      margin-bottom: 40px;
+      width: 110px;
+    }
 
-      .legend-key {
-        display: inline-block;
-        border-radius: 20%;
-        width: 10px;
-        height: 10px;
-        margin-right: 5px;
-      }
+    .legend-key {
+      display: inline-block;
+      border-radius: 20%;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
 
-      #buttons {
-        width: 45%;
-        margin: 0 auto;
-        }
-        .button {
-        display: inline-block;
-        position: relative;
-        cursor: pointer;
-        width: 20%;
-        padding: 8px;
-        border-radius: 3px;
-        margin-top: 10px;
-        font-size: 12px;
-        text-align: center;
-        color: #000;
-        background: #fff;
-        font-family: sans-serif;
-        font-weight: bold;
-        }
+    #buttons {
+      width: 45%;
+      margin: 0 auto;
+    }
 
-    </style>
-  </head>
+    .button {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      width: 20%;
+      padding: 8px;
+      border-radius: 3px;
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+      color: #000;
+      background: #fff;
+      font-family: sans-serif;
+      font-weight: bold;
+    }
+  </style>
+</head>
 
-  <body>
-    <div id="map"></div>
-    <ul id="buttons">
-      <li id="button-fr" class="button">French</li>
-      <li id="button-ru" class="button">Russian</li>
-      <li id="button-de" class="button">German</li>
-      <li id="button-es" class="button">Spanish</li>
-      </ul>
-    <div class="map-overlay" id="features">
-      <h2>COVID-19 Death Rates Per Million People</h2><p>Source: <a class='link' target='_blank' href='https://covid.ourworldindata.org/data/owid-covid-data.csv'>The Complete Our World in COVID Dataset</a></p>
-      <div id="cd"><p>Hover over a Country!</p></div>
+<body>
+  <div id="map"></div>
+  <ul id="buttons">
+    <li id="button-fr" class="button">French</li>
+    <li id="button-ru" class="button">Russian</li>
+    <li id="button-de" class="button">German</li>
+    <li id="button-es" class="button">Spanish</li>
+  </ul>
+  <div class="map-overlay" id="features">
+    <h2>COVID-19 Death Rates Per Million People</h2>
+    <p>Source: <a class='link' target='_blank' href='https://covid.ourworldindata.org/data/owid-covid-data.csv'>The
+        Complete Our World in COVID Dataset</a></p>
+    <div id="cd">
+      <p>Hover over a Country!</p>
     </div>
-    <div class="map-overlay" id="legend"></div>
-    <div class="covid-deaths">
-      <div><strong>Magnitude:</strong> <span id="mag"></span></div>
-      <div><strong>Location:</strong> <span id="loc"></span></div>
-      <div><strong>Date:</strong> <span id="date"></span></div>
-    </div>
+  </div>
+  <div class="map-overlay" id="legend"></div>
+  <div class="covid-deaths">
+    <div><strong>Magnitude:</strong> <span id="mag"></span></div>
+    <div><strong>Location:</strong> <span id="loc"></span></div>
+    <div><strong>Date:</strong> <span id="date"></span></div>
+  </div>
 
-    <!-- Load the `mapbox-gl-geocoder` plugin. -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
-      type="text/css"
-    />
-    <script>
-      // access token
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA";
+  <!-- Load the `mapbox-gl-geocoder` plugin. -->
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+    type="text/css" />
+  <script>
+    // access token
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA";
 
-      // create new map
-      const map = new mapboxgl.Map({
-        container: "map", // container id
-        style: "mapbox://styles/zacstanley/ckx41109p5o6w14lgcwg1ipvo", // replace this with your style URL
-        center: [20.84, 44.306], // starting position [lng, lat]
-        zoom: 1.5, // starting zoom
-      });
+    // create new map
+    const map = new mapboxgl.Map({
+      container: "map", // container id
+      style: "mapbox://styles/zacstanley/ckx41109p5o6w14lgcwg1ipvo", // replace this with your style URL
+      center: [20.84, 44.306], // starting position [lng, lat]
+      zoom: 1.5, // starting zoom
+    });
 
-      document.getElementById('buttons').addEventListener('click', (event) => {
-        const language = event.target.id.substr('button-'.length);
-        // Use setLayoutProperty to set the value of a layout property in a style layer.
-        // The three arguments are the id of the layer, the name of the layout property,
-        // and the new property value.
+    document.getElementById('buttons').addEventListener('click', (event) => {
+      const language = event.target.id.substr('button-'.length);
+      // Use setLayoutProperty to set the value of a layout property in a style layer.
+      // The three arguments are the id of the layer, the name of the layout property,
+      // and the new property value.
 
-        map.setLayoutProperty('country-label', 'text-field', [
+      map.setLayoutProperty('country-label', 'text-field', [
         'get',
         `name_${language}`
-        ]);
+      ]);
+    });
+
+    map.on("click", function (e) {
+      var coords = e.lngLat;
+      map.flyTo({
+        center: [coords.lng, coords.lat],
+        speed: 0.1,
+        curve: 1,
       });
+    });
 
-      map.on("click", function (e) {
-        var coords = e.lngLat;
-        map.flyTo({
-          center: [coords.lng, coords.lat],
-          speed: 0.1,
-          curve: 1,
-        });
-      });
+    // Add geocoder to the map and put it in the top left corner
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+      }),
+      "top-left"
+    );
 
-      // Add geocoder to the map and put it in the top left corner
-      map.addControl(
-        new MapboxGeocoder({
-          accessToken: mapboxgl.accessToken,
-          mapboxgl: mapboxgl,
-        }),
-        "top-left"
-      );
+    // Add zoom and rotation controls to the map and put it in the top left corner
+    map.addControl(new mapboxgl.NavigationControl(), "top-left");
 
-      // Add zoom and rotation controls to the map and put it in the top left corner
-      map.addControl(new mapboxgl.NavigationControl(), "top-left");
+    // Add full screen button to the map
+    map.addControl(new mapboxgl.FullscreenControl(), 'bottom-left');
 
-      // Add full screen button to the map
-      map.addControl(new mapboxgl.FullscreenControl(), 'bottom-left');
+    map.on("load", () => {
+      // make a pointer cursor
+      map.getCanvas().style.cursor = "default";
 
-      map.on("load", () => {
-        // make a pointer cursor
-        map.getCanvas().style.cursor = "default";
+      // array of legend labels
+      const layers = [
+        "No Data",
+        "0-448",
+        "448-1182",
+        "1181-2006",
+        "2006-3173",
+        "3173-6039",
+      ];
 
-        // array of legend labels
-        const layers = [
-          "No Data",
-          "0-448",
-          "448-1182",
-          "1181-2006",
-          "2006-3173",
-          "3173-6039",
-        ];
+      // array legend colors
+      const colors = ["#000", "#fecc5c", "#fd8d3c", "#ef3b1f", "#f03b20", "#bd0026"];
 
-        // array legend colors
-        const colors = ["#000", "#fecc5c", "#fd8d3c", "#ef3b1f", "#f03b20", "#bd0026"];
+      // create legend
+      const legend = document.getElementById("legend");
 
-        // create legend
-        const legend = document.getElementById("legend");
+      // loop through layers
+      layers.forEach((layer, i) => {
+        const color = colors[i];
+        const item = document.createElement("div");
+        const key = document.createElement("span");
+        key.className = "legend-key";
+        key.style.backgroundColor = color;
 
-        // loop through layers
-        layers.forEach((layer, i) => {
-          const color = colors[i];
-          const item = document.createElement("div");
-          const key = document.createElement("span");
-          key.className = "legend-key";
-          key.style.backgroundColor = color;
+        // create span element
+        const value = document.createElement("span");
+        value.innerHTML = `${layer}`;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
 
-          // create span element
-          const value = document.createElement("span");
-          value.innerHTML = `${layer}`;
-          item.appendChild(key);
-          item.appendChild(value);
-          legend.appendChild(item);
+        // add listener and change info window on hover
+        map.on("mousemove", (event) => {
+          const covidDeaths = map.queryRenderedFeatures(event.point, {
+            layers: ["COVIDDeathRates"],
+          });
 
-          // add listener and change info window on hover
-          map.on("mousemove", (event) => {
-            const covidDeaths = map.queryRenderedFeatures(event.point, {
-              layers: ["COVIDDeathRates"],
-            });
+          // declare variable for if statement
+          const deathRate = covidDeaths[0].properties.deathrate_permillion
 
-            const deathRate = covidDeaths[0].properties.deathrate_permillion
-
-            if (deathRate == null) {
-              document.getElementById("cd").innerHTML = covidDeaths.length
+          // make it so 'No Data' displays on null values in the features window
+          if (deathRate == null) {
+            document.getElementById("cd").innerHTML = covidDeaths.length
               ? `<h3>${covidDeaths[0].properties.ADMIN}</h3><p><strong><em>No Data</strong></em></p>`
               : `<p>Hover over a country!</p>`;
-              
-            } else {
-            
-              document.getElementById("cd").innerHTML = covidDeaths.length
+
+          } else {
+
+            document.getElementById("cd").innerHTML = covidDeaths.length
               ? `<h3>${covidDeaths[0].properties.ADMIN}</h3><p><strong><em>${covidDeaths[0].properties.deathrate_permillion}</strong> deaths per million people</em></p>`
               : `<p>Hover over a country!</p>`;
-                    }          
-                  });
+          }
         });
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
